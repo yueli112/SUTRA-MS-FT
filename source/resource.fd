@@ -1,0 +1,5 @@
+!MS$FREEFORM
+! Microsoft Developer Studio generated include file.
+! Used by sutramsicon.rc
+!
+      integer, parameter :: IDI_ICON1                       = 101
