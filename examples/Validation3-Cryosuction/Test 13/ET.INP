@@ -1,0 +1,115 @@
+## THE FILE IS USED TO AVOID HARD CODING TO THE ORIGINAL SOURCE CODE OF SUTRA_MS
+## AS MUCH AS POSSIBLE. IN THAT CASE, ALL THE SIMULATIONS CAN USE THE SAME CODE
+## AND USERS ONLY NEED TO CAHNGE THE VALUES OF FOLLOWING PARAMETERS ACCORDING TO
+## THEIR NEEDS
+##
+##      EEEEEEEEEEEEE     TTTTTTTTTTTTT
+##      EE                     TT
+##      EE                     TT
+##      EE                     TT
+##      EEEEEEEEEEEEE          TT
+##      EE                     TT
+##      EE                     TT
+##      EE                     TT
+##      EEEEEEEEEEEEE          TT
+## -----------------------------------------------------------------------------------
+##
+##  M_TIDE
+##  TASP   -- SPRING TIDAL AMPLITUDE(M); 
+##  TANE   -- NEAP TIDAL AMPLITUDE (M);
+##  TPSP   -- TIDAL PERIOD OF SPRING TIDE(S); 
+##  TPNP   -- TIDAL PERIOD OF NEAP TIDE(S); 
+##  TM     -- MEAN TIDAL LEVEL[M]; 
+##  RHOST  -- THE DENSITY FOR TIDE WATER; 
+##  SC     -- SALINITY OF THE SEAWATER;[-] 
+##  ITT    -- ITERRATION CRITERIA FOR BCTIME SHOULD BE LARGE OR EQUAL THAN 2
+##	SWT -- SEAWATER TEMPERATURE AT SEAWARD BOUNDARY
+##	FWT -- FRESHWATER TEMPERATURE AT LANDWARD BOUNDARY
+##	FWH -- FRESHWATER CONSTANT HEAD (M)
+##  [TASP]   [TANE]    [TPSP]      [TPNP]     [TM]   [RHOST]    [SC]	[BNDSWT]	[FWT]		[FWH]    
+     0.25       0      3600         100      0.8    1000.00     0.0 	  5	        -15	      0
+## -----------------------------------------------------------------------------------
+##
+##  M_SEASONALT
+##  SEASONAL TEMPERATURE VARIATION
+##  DELTWARM-- MAX MAGNITUDE OF TEMPERATURE DIFFERENT IN WARMER MONTHS [DEGREE C]
+##  DELTCOLD-- MAX MAGNITUDE OF TEMPERATURE DIFFERENT IN COLDER MONTHS [DEGREE C]
+##  PWARM	-- DURATION OF THE WARMER MONTH [MONTH]
+##  PCOLD	-- DURATION OF THE COLDER MONTH [MONTH]
+##	[DELTWARM]	[DELTCOLD]	[PWARM]	[PCOLD]
+#	0			0			0		0
+##  
+## -----------------------------------------------------------------------------------
+##	  
+##  M_SWCC
+##  USING EACH PARAMETERS ARE CONTROLLED BY NREG AND LREG AT DATASET 14 AND DATASET 15
+##  THE UNIT OF AA1[M-1], PHY0[M] AND PHYB[M] !
+##  FOR EXAMPLE: 0.0007654 [PA] * 9800 [m/s2 kg/m3] = 7.508 [1/m]
+##  SUCH CONVERSION IS TO ASSIST THE 
+##  ECTO--- ESSENTRICITY AND TORTUOSITY THE DEFAULT VALUE IS 0.5
+##  [SWRES1]  [AA1]   [VN1]    [SWRES2]   [AA2]    [VN2]  
+####    0.1E0    5   1.7E0   0.1E0    5   1.7E0   0.1E0    5   1.7E0 
+    0.05      3.6E-4    2.5     1E-2     5E-5    2    1E-2     5E-5    2  
+##
+## -----------------------------------------------------------------------------------
+##
+##  M_CONTROL
+##  AVEGEL -- OUTPUT TIDALLY-AVERAGE VELOCITY WHEN 1, OTHERWISE NOT
+##  NSTEP  -- NUMBER OF TIME STEPS IN A TIDAL CYCLE
+##  TLAB   -- READ EXPERIMENT TIDE SIGNAL WHEN 1, OTHERWISE USE M_TIDE
+##  HOMO   -- HOMOGENEOUS WHEN 0, OTHERWISE HETEROGENEOUS WHEN 1
+##  AMP    -- AMPLITUDE OF HETEROGENEITY
+##  [AVGVEL] [NSTEP] [TLAB] [HOMO] [AMP]
+       0       360     0      0     0
+##
+## -----------------------------------------------------------------------------------
+##
+##  M_SEEPAGE
+##  SEEP   -- OUTPUT SEEPAGE NODES WHEN 1, OTHERWISE NOT
+##  XSTART -- INITIAL X-COORDINATE OF SEEPAGE NODE
+##  XSTART -- INITIAL Z-COORDINATE OF SEEPAGE NODE
+##  [SEEP] [XSTART] [ZSTART]
+      1        0        0       
+##
+## -----------------------------------------------------------freeze------------------------
+## IFREEZ--if use freeze-thaw module,1 for use
+## COMPI--ice Compressibility
+## CI--ice Specific heat capacity
+## SIMGAI--Thermal conductivity
+## RHOI--ice density,assumed to equal water
+## HTLAT--Latent heat
+##[IFREEZ][COMPI] [CI] [SIMGAI] [RHOI] [HTLAT] 
+     1      0     2100   2.176     1000   3.34E5
+##-----------------------------------------------------freezing curve-------------------------------------------
+##[FIRS][SPEFR][SLSATRES1] [TLRES1] [TFREEZ1] [RKMIN1] ....
+## FIRS--caclulate water or ice first(Not much difference),1 for water,2 for ice first
+## SPEFR--freezing curve species,1 for piecewise linear function,2 for exponential function
+## SLSATRES1--Residual Saturation for region 1
+## TLRES1--Residual temperature for region 1
+## TFREEZ1--freezing point for region 1
+## RKMIN1--minimum relative pemeability for region 1
+## SLSATRES2 --for region 2 (if only 1 region,these number are no useful)
+## TLRES2
+## ......
+## RKMIN3--for region 3 
+##[FIRS][SPEFR][SLSATRES1] [TLRES1] [TFREEZ1] [RKMIN1] ....
+	 1      1      0.05    -1         0       1e-6         1e-2  -2  0  1e-6    1e-2  -2  0  1e-6 
+##Solubility parameters,no use
+	  0.26    1000
+##  no use [COLUMN] [OUT_MEAN] [OUT_INTERVAL]   [ITtot]  
+          201      8640        10         105120
+## -------------------------------------------------------------------------------------------
+## [IFEVAP] [IFSUCTION]  [BOUNDSPE] [DM1] [DM2]       [DEV]
+## IFEVAP --if evaporation be considered,no use now
+## IFSUCTION--if cryosuction be considered,1 for yes,0 for no
+## BOUNDSPE--different boundary conditions in userdefined program
+## DM1--cryosuction parameter in freezing process,too small may cause no-convergence,determined by experiments
+## DM2--cryosuction parameter in thawing process,too small may cause no-convergence,determined by experiments
+## DEV--cryosuction parameter in freezing process,Preventing Overestimating cryosuction,determined by experiments
+## [IFEVAP] [IFSUCTION]  [BOUNDSPE] [DM1] [DM2] [DEV]
+      0    1                 1      100    9999   0.2
+## -------------------------------------------------------------------------------------------
+## AASFCC--parameter in clapeyron function,no use now
+## KSF--Freezing point depression coefficient of solute,℃/ppt
+##[AASFCC] [KSF]
+	  0.05  0

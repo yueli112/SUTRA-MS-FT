@@ -1,0 +1,10 @@
+INP    50 fr.inp
+ICS    55 fr.ics
+RST    66 fr.rst
+NOD    30 fr.nod
+ELE    40 fr.ele
+OBS    70 fr.obs
+SMY    80 fr.smy
+BCOP   96 fr.bcop 
+BCOU   98 fr.bcou
+LST    60 fr.lst
